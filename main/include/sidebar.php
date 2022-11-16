@@ -232,7 +232,7 @@
                         <a href="#">
                             <div class="row">
                                 <div class="col-auto ps-1"><img src="./img/11-rmbg.png" alt=""></div>
-                                <div class="col-auto list-sub-header">Teams</div>
+                                <div class="col-auto list-sub-header">Projects</div>
                             </div>
                         </a>
                     </li>
@@ -240,15 +240,7 @@
                         <a href="#">
                             <div class="row">
                                 <div class="col-auto ps-1"><img src="./img/task-rmbg.png" alt=""></div>
-                                <div class="col-auto list-sub-header">Task</div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="row">
-                                <div class="col-auto ps-1"><img src="./img/prog-rmbg.png" alt=""></div>
-                                <div class="col-auto list-sub-header">Progress</div>
+                                <div class="col-auto list-sub-header">Project Details</div>
                             </div>
                         </a>
                     </li>
@@ -297,7 +289,7 @@
                         <a href="#">
                             <div class="row">
                                 <div class="col-auto ps-1"><img src="./img/book-serv-rmbg.png" alt=""></div>
-                                <div class="col-auto list-sub-header">Book Services</div>
+                                <div class="col-auto list-sub-header">Request Services</div>
                             </div>
                         </a>
                     </li>

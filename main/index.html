@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>CodePen</title>
+</head>
+
+<body>
+    <!-- partial:index.partial.html -->
+    <html>
+
+    <head>
+        <style type="text/css" media="print">
+            div.no_print {
+                display: none;
+            }
+        </style>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $("#mytable").DataTable();
+            });
+        </script>
+        <script>
+            function addRow(tableID) {
+                var tbl = document.getElementById(tableID);
+                var rws = tbl.rows;
+                var lst = rws[rws.length - 1];
+                var cls = lst.cells.length;
+                var ro = tbl.insertRow(1);
+                for (var j = 0; j < cls; j++) {
+                    var ce = ro.insertCell(-1);
+                    ce.innerHTML = 'something';
+                }
+            }
+
+            function print_() {
+                window.print();
+            }
+        </script>
+    </head>
+
+    <body>
+        <div class="no_print">
+            <p>
+                <input type="button" value="Add cell" onclick="addRow ('mytable')">
+                <input class="button" type="submit" value="Print" onclick="print_()"></input>
+        </div>
+        <table id="mytable" class="display">
+            <thead>
+                <tr>
+                    <td><b>id</b></td>
+                    <td><b>first_name</b></td>
+                    <td><b>last_name</b></td>
+                </tr>
+            </thead>
+            <tr>
+                <td>1</td>
+                <td>f_a</td>
+                <td>l_a</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>f_b</td>
+                <td>l_b</td>
+            </tr>
+        </table>
+    </body>
+
+    </html>
+    <!-- partial -->
+</body>
+
+</html>

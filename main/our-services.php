@@ -83,8 +83,8 @@ include('./include/sidebar.php');
     }
 
     .services img {
-        width: 10rem;
-        height: 10rem;
+        width: 8rem;
+        height: 8rem;
         object-fit: cover;
         border-radius: 10px;
     }
@@ -95,6 +95,95 @@ include('./include/sidebar.php');
         text-align: center;
         margin-top: 0px;
         max-width: 9rem;
+    }
+
+    .btn-services {
+        background-color: #0f7dff;
+        color: #fff;
+        padding: 10px 40px;
+        border-radius: 30px;
+    }
+
+    .overlay {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        border-radius: 5px;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: -1;
+        opacity: 0;
+        transition: 0.2s;
+    }
+
+    .showoverlay {
+        z-index: 1;
+        opacity: 1;
+    }
+
+    .requestDemoForm {
+        width: 60%;
+        background-color: #0f7dff;
+        padding: 2rem;
+        position: absolute;
+        left: 50%;
+        top: -65%;
+        transform: translate(-40%, -50%);
+        transition: .5s;
+    }
+
+    .showrequestDemoForm {
+        top: 65%;
+        z-index: 2;
+    }
+
+    .requestDemoForm span {
+        position: absolute;
+        top: 0;
+        right: 0%;
+        font-size: 2rem;
+        padding: 0rem 1rem;
+        background-color: #fff;
+        cursor: pointer;
+        color: #0f7dff;
+    }
+
+    .requestDemoForm span:hover {
+        color: #fff;
+        background-color: #0f7dff;
+    }
+
+
+    /* schedule Project Form CSS */
+    .scheduleProjectForm {
+        width: 60%;
+        background-color: #0f7dff;
+        padding: 2rem;
+        position: absolute;
+        left: 50%;
+        top: -65%;
+        transform: translate(-40%, -50%);
+        transition: .5s;
+    }
+
+    .showscheduleProjectForm {
+        top: 65%;
+        z-index: 2;
+    }
+
+    .scheduleProjectForm span {
+        position: absolute;
+        top: 0;
+        right: 0%;
+        font-size: 2rem;
+        padding: 0rem 1rem;
+        background-color: #fff;
+        cursor: pointer;
+        color: #0f7dff;
+    }
+
+    .scheduleProjectForm span:hover {
+        color: #fff;
+        background-color: #0f7dff;
     }
 </style>
 <!-- Page Content  -->
@@ -202,8 +291,9 @@ include('./include/sidebar.php');
                 </div>
             </div>
         </div>
-        <div class="row project-section mt-2">
-            <div class="project-header">
+        <div class="row project-section">
+            <div class="overlay" id="overlay" onclick="closeModal()"></div>
+            <div class="project-header mt-2">
                 <h3>Our Services</h3>
             </div>
             <div class="container">
@@ -243,10 +333,162 @@ include('./include/sidebar.php');
                         <h5>3D Mapping</h5>
                     </div>
                 </div>
+                <div class="row d-flex justify-content-center pt-3">
+                    <div class="col-auto">
+                        <button class="btn btn-services btn-light" onclick="showModal()">Request Demo</button>
+                    </div>
+                    <div class="col-auto">
+                        <button class="btn btn-services btn-light" onclick="showModal2()">Schedule Service</button>
+                    </div>
+                </div>
+
+                <!-- Request Demo Form -->
+
+                <div class="requestDemoForm">
+                    <span onclick="closeModal()">&times;</span>
+                    <form action="">
+                        <div class="header d-flex justify-content-center">
+                            <h5>Request Demo</h5>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="staticEmail" class="col-sm-4 col-form-label">Location</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="inputEmail" value="">
+                            </div>
+                            <div class="col-sm-2">
+                                <img src="./img/94.png" alt="" style="width: 30px;height: 30px;">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="inputPassword" class="col-sm-4 col-form-label">Coordinates</label>
+                            <div class="col-sm-3">
+                                <input type="password" class="form-control" id="inputPassword">
+                            </div>
+                            <div class="col-sm-3">
+                                <input type="password" class="form-control" id="inputPassword">
+                            </div>
+                            <div class="col-sm-2">
+                                <img src="./img/94.png" alt="" style="width: 30px;height: 30px;">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="staticEmail" class="col-sm-4 col-form-label">Estimated Area</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="inputEmail" value="">
+                            </div>
+                            <div class="col-sm-2">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="staticEmail" class="col-sm-4 col-form-label">Service</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="inputEmail" value="">
+                            </div>
+                            <div class="col-sm-2">
+                                <img src="./img/95.png" alt="" style="width: 30px;height: 30px;">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="staticEmail" class="col-sm-4 col-form-label">Tentative Demo Date</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="inputEmail" value="">
+                            </div>
+                            <div class="col-sm-2">
+                                <img src="./img/96.png" alt="" style="width: 30px;height: 30px;">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="staticEmail" class="col-sm-4 col-form-label">Contact Number</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="inputEmail" value="">
+                            </div>
+                            <div class="col-sm-2">
+
+                            </div>
+                        </div>
+                        <div class="header d-flex justify-content-center">
+                            <button class="btn btn-services btn-light">Schedule Service</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Schedule Project Form -->
+
+                <div class="scheduleProjectForm">
+                    <span onclick="closeModal2()">&times;</span>
+                    <form action="">
+                        <div class="header d-flex justify-content-center">
+                            <h5>Schedule Project</h5>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="staticEmail" class="col-sm-4 col-form-label">Location</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="inputEmail" value="">
+                            </div>
+                            <div class="col-sm-2">
+                                <img src="./img/94.png" alt="" style="width: 30px;height: 30px;">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="inputPassword" class="col-sm-4 col-form-label">Coordinates</label>
+                            <div class="col-sm-3">
+                                <input type="password" class="form-control" id="inputPassword">
+                            </div>
+                            <div class="col-sm-3">
+                                <input type="password" class="form-control" id="inputPassword">
+                            </div>
+                            <div class="col-sm-2">
+                                <img src="./img/94.png" alt="" style="width: 30px;height: 30px;">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="staticEmail" class="col-sm-4 col-form-label">Estimated Area</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="inputEmail" value="">
+                            </div>
+                            <div class="col-sm-2">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="staticEmail" class="col-sm-4 col-form-label">Service</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="inputEmail" value="">
+                            </div>
+                            <div class="col-sm-2">
+                                <img src="./img/96.png" alt="" style="width: 30px;height: 30px;">
+                            </div>
+                        </div>
+                        <div class=" row">
+                            <label for="inputPassword" class="col-sm-4 col-form-label">Project Date</label>
+                            <div class="col-sm-3">
+                                <input type="password" class="form-control" id="inputPassword">
+                                <p>Start</p>
+                            </div>
+                            <div class="col-sm-3">
+                                <input type="password" class="form-control" id="inputPassword">
+                                <p>End</p>
+                            </div>
+                            <div class="col-sm-2">
+                                <img src="./img/95.png" alt="" style="width: 30px;height: 30px;">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="staticEmail" class="col-sm-4 col-form-label">Contact Number</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="inputEmail" value="">
+                            </div>
+                            <div class="col-sm-2">
+
+                            </div>
+                        </div>
+                        <div class="header d-flex justify-content-center">
+                            <button class="btn btn-services btn-light">Submit</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 <?php
 include('./include/footer.php');

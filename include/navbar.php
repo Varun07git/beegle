@@ -21,7 +21,7 @@
             <a class="nav-link active" aria-current="page" href="#">Services</a>
         </li>
         <li class="nav-item px-3">
-            <a class="nav-link" href="#">Use Case</a>
+            <a class="nav-link" href="#">Use Cases</a>
         </li>
         <li class="nav-item px-3">
             <a class="nav-link" href="#">About</a>

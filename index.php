@@ -2,15 +2,15 @@
 <?php include("./include/navbar.php") ?>
 <style>
     .form {
-        width: 90%;
+        width: 80%;
         margin: 0 auto;
         padding: 20px;
         background-color: #ffffff42;
         border-radius: 30px;
     }
 
-    .heading h2{
-        font-size: 45px;
+    .heading h3{
+        font-size: 35px;
         font-weight: bolder;
         color: #fff;
         text-align: center;
@@ -66,10 +66,10 @@
     </div>
     <!-- sign in form -->
     <div class="col-6">
+        <div class="heading pb-3">
+            <h3>Customer Self Portal Login</h3>
+        </div>
         <div class="form">
-            <div class="heading">
-                <h2>Sign in</h2>
-            </div>
             <form action="./main/projects.php" method="post" class="pt-3 px-4">
                 <div class="form-group py-2">
                     <label for="username" class="label">Email</label>
@@ -83,7 +83,7 @@
                     <a href="#" class="text-white">Forgot Password ?</a>
                 </div>
                 <div class="signin-btn pt-4">
-                <button type="submit" class="btn btn-light">Sign in</button>
+                <button type="submit" class="btn btn-light">Log In</button>
                 </div>
             </form>
         </div>
