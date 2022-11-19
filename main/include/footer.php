@@ -29,6 +29,16 @@
          document.querySelector('.overlay').classList.remove('showoverlay');
          document.querySelector('.scheduleProjectForm').classList.remove('showscheduleProjectForm');
      }
+    //  Request Quote Form modal
+        function showModal3() {
+            document.querySelector('.overlay').classList.add('showoverlay');
+            document.querySelector('.requestQuoteForm').classList.add('showrequestQuoteForm');
+        }
+    
+        function closeModal3() {
+            document.querySelector('.overlay').classList.remove('showoverlay');
+            document.querySelector('.requestQuoteForm').classList.remove('showrequestQuoteForm');
+        }
  </script>
  <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
  <script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>

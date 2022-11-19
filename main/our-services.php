@@ -125,6 +125,7 @@ include('./include/sidebar.php');
         background-color: #0f7dff;
         padding: 2rem;
         position: absolute;
+        color: #fff;
         left: 50%;
         top: -65%;
         transform: translate(-40%, -50%);
@@ -159,6 +160,7 @@ include('./include/sidebar.php');
         background-color: #0f7dff;
         padding: 2rem;
         position: absolute;
+        color: #fff;
         left: 50%;
         top: -65%;
         transform: translate(-40%, -50%);
@@ -182,6 +184,40 @@ include('./include/sidebar.php');
     }
 
     .scheduleProjectForm span:hover {
+        color: #fff;
+        background-color: #0f7dff;
+    }
+
+    /* Request Quote Form CSS */
+    .requestQuoteForm {
+        width: 60%;
+        background-color: #0f7dff;
+        padding: 2rem;
+        position: absolute;
+        color: #fff;
+        left: 50%;
+        top: -65%;
+        transform: translate(-40%, -50%);
+        transition: .5s;
+    }
+
+    .showrequestQuoteForm {
+        top: 65%;
+        z-index: 2;
+    }
+
+    .requestQuoteForm span {
+        position: absolute;
+        top: 0;
+        right: 0%;
+        font-size: 2rem;
+        padding: 0rem 1rem;
+        background-color: #fff;
+        cursor: pointer;
+        color: #0f7dff;
+    }
+
+    .requestQuoteForm span:hover {
         color: #fff;
         background-color: #0f7dff;
     }
@@ -335,6 +371,8 @@ include('./include/sidebar.php');
                 </div>
                 <div class="row d-flex justify-content-center pt-3">
                     <div class="col-auto">
+                        <!-- anchor tag to open modal -->
+                        <!-- <a href="#" class="btn btn-services btn-light" id="btnShowModal">Request a Demo</a> -->
                         <button class="btn btn-services btn-light" onclick="showModal()">Request Demo</button>
                     </div>
                     <div class="col-auto">
@@ -389,6 +427,15 @@ include('./include/sidebar.php');
                             </div>
                         </div>
                         <div class="mb-3 row">
+                            <label for="staticEmail" class="col-sm-4 col-form-label">Crop</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="inputEmail" value="">
+                            </div>
+                            <div class="col-sm-2">
+                                <img src="./img/96.png" alt="" style="width: 30px;height: 30px;">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
                             <label for="staticEmail" class="col-sm-4 col-form-label">Tentative Demo Date</label>
                             <div class="col-sm-6">
                                 <input type="text" class="form-control" id="inputEmail" value="">
@@ -407,7 +454,7 @@ include('./include/sidebar.php');
                             </div>
                         </div>
                         <div class="header d-flex justify-content-center">
-                            <button class="btn btn-services btn-light">Schedule Service</button>
+                            <button class="btn btn-services btn-light">Submit</button>
                         </div>
                     </form>
                 </div>
@@ -449,6 +496,15 @@ include('./include/sidebar.php');
                             <div class="col-sm-2">
                             </div>
                         </div>
+                         <div class="mb-3 row">
+                            <label for="staticEmail" class="col-sm-4 col-form-label">Crop</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="inputEmail" value="">
+                            </div>
+                            <div class="col-sm-2">
+                                <img src="./img/96.png" alt="" style="width: 30px;height: 30px;">
+                            </div>
+                        </div>
                         <div class="mb-3 row">
                             <label for="staticEmail" class="col-sm-4 col-form-label">Service</label>
                             <div class="col-sm-6">
@@ -486,6 +542,90 @@ include('./include/sidebar.php');
                         </div>
                     </form>
                 </div>
+
+                <!-- Request quote form -->
+                <div class="requestQuoteForm">
+                    <span onclick="closeModal3()">&times;</span>
+                    <form action="">
+                        <div class="header d-flex justify-content-center">
+                            <h5>Request Quote</h5>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="staticEmail" class="col-sm-4 col-form-label">Location</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="inputEmail" value="">
+                            </div>
+                            <div class="col-sm-2">
+                                <img src="./img/94.png" alt="" style="width: 30px;height: 30px;">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="inputPassword" class="col-sm-4 col-form-label">Coordinates</label>
+                            <div class="col-sm-3">
+                                <input type="password" class="form-control" id="inputPassword">
+                            </div>
+                            <div class="col-sm-3">
+                                <input type="password" class="form-control" id="inputPassword">
+                            </div>
+                            <div class="col-sm-2">
+                                <img src="./img/94.png" alt="" style="width: 30px;height: 30px;">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="staticEmail" class="col-sm-4 col-form-label">Estimated Area</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="inputEmail" value="">
+                            </div>
+                            <div class="col-sm-2">
+                            </div>
+                        </div>
+                         <div class="mb-3 row">
+                            <label for="staticEmail" class="col-sm-4 col-form-label">Crop</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="inputEmail" value="">
+                            </div>
+                            <div class="col-sm-2">
+                                <img src="./img/96.png" alt="" style="width: 30px;height: 30px;">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="staticEmail" class="col-sm-4 col-form-label">Service</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="inputEmail" value="">
+                            </div>
+                            <div class="col-sm-2">
+                                <img src="./img/96.png" alt="" style="width: 30px;height: 30px;">
+                            </div>
+                        </div>
+                        <div class=" row">
+                            <label for="inputPassword" class="col-sm-4 col-form-label">Project Date</label>
+                            <div class="col-sm-3">
+                                <input type="password" class="form-control" id="inputPassword">
+                                <p>Start</p>
+                            </div>
+                            <div class="col-sm-3">
+                                <input type="password" class="form-control" id="inputPassword">
+                                <p>End</p>
+                            </div>
+                            <div class="col-sm-2">
+                                <img src="./img/95.png" alt="" style="width: 30px;height: 30px;">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="staticEmail" class="col-sm-4 col-form-label">Contact Number</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="inputEmail" value="">
+                            </div>
+                            <div class="col-sm-2">
+
+                            </div>
+                        </div>
+                        <div class="header d-flex justify-content-center">
+                            <button class="btn btn-services btn-light">Submit</button>
+                        </div>
+                    </form>
+                </div>
+
             </div>
         </div>
     </div>

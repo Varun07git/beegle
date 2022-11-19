@@ -133,92 +133,8 @@
         background-color: #0f7dff;
     }
 
-    .status-circle-purple {
-        background-color: #800080;
-    }
-
-    .status-circle-orange {
-        background-color: #ff8000;
-    }
-
     .status-circle-gray {
         background-color: #808080;
-    }
-
-    .status-circle-black {
-        background-color: #000000;
-    }
-
-    .status-circle-white {
-        background-color: #ffffff;
-    }
-
-    .status-circle-brown {
-        background-color: #a52a2a;
-    }
-
-    .status-circle-pink {
-        background-color: #ffc0cb;
-    }
-
-    .status-circle-cyan {
-        background-color: #00ffff;
-    }
-
-    .status-circle-lime {
-        background-color: #00ff00;
-    }
-
-    .status-circle-maroon {
-        background-color: #800000;
-    }
-
-    .status-circle-navy {
-        background-color: #000080;
-    }
-
-    .status-circle-olive {
-        background-color: #808000;
-    }
-
-    .status-circle-teal {
-        background-color: #008080;
-    }
-
-    .status-circle-silver {
-        background-color: #c0c0c0;
-    }
-
-    .status-circle-gold {
-        background-color: #ffd700;
-    }
-
-    .status-circle-aqua {
-        background-color: #00ffff;
-    }
-
-    .status-circle-fuchsia {
-        background-color: #ff00ff;
-    }
-
-    .status-circle-indigo {
-        background-color: #4b0082;
-    }
-
-    .status-circle-lavender {
-        background-color: #e6e6fa;
-    }
-
-    .status-circle-magenta {
-        background-color: #ff00ff;
-    }
-
-    .status-circle-mustard {
-        background-color: #ffdb58;
-    }
-
-    .status-circle-plum {
-        background-color: #dda0dd;
     }
 </style>
 <!-- Page Content  -->
@@ -328,18 +244,19 @@
         </div>
         <div class="row project-section">
             <div class="row project-header mt-2">
-                <h3>Project Profile</h3>
+                <h3>Project Details</h3>
             </div>
             <div class="row">
                 <div class="no_print">
                     <p>
-                        <input type="button" value="Add cell" onclick="addRow ('mytable')" style="background-color: #0f7dff; border:none; border-radius:10px; color:#fff;padding:.4rem;">
-                        <input class="button" type="submit" value="Print" onclick="print_()" style="background-color: #0f7dff; border:none; border-radius:10px; color:#fff;padding:.4rem;"></input>
+                        <!-- <input type="button" value="Add cell" onclick="addRow ('mytable')" style="background-color: #0f7dff; border:none; border-radius:10px; color:#fff;padding:.4rem;"> -->
+                        <input class="button" type="submit" value="Print" onclick="print_()" style="background-color: #0f7dff; border:none; border-radius:10px; color:#fff;padding:.4rem 2rem;"></input>
                 </div>
                 <table id="mytable" class="display project-table" style="width: 100%;">
                     <thead>
                         <tr>
-                            <td><b><input type="radio"></b></td>
+                            <!-- table check box -->
+                            <th><input type="checkbox" id="checkAll" onclick="checkAll()"></th>
                             <td><b>id</b></td>
                             <td><b>Project Name</b></td>
                             <td><b>Members</b></td>
@@ -350,7 +267,8 @@
                         </tr>
                     </thead>
                     <tr>
-                        <td><input type="radio"></td>
+                        <!-- check box -->
+                        <td><input type="checkbox" name="check" class="check"></td>
                         <td>1</td>
                         <td>Beegle Activities</td>
                         <td><img src="./img/user.png" alt="" width="20px" height="20px"></td>

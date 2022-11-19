@@ -96,6 +96,45 @@ include('./include/sidebar.php');
         margin-top: 0px;
         max-width: 9rem;
     }
+    /* percentage of completed project circle css */
+    .percentage {
+        position: absolute;
+        margin-bottom: 0px;
+        right: 0;
+        width: fit-content;
+    }
+    .circle{
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background-color: #0f7dff;
+        margin: 0 auto;
+        position: relative;
+    }
+
+    .inner-circle {
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        background-color: #f0ede2;
+        margin: 0 auto;
+    }
+
+    .inner-circle p {
+        /* algin in center */
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #0f7dff;
+    }
+
 </style>
 
 
@@ -210,6 +249,22 @@ include('./include/sidebar.php');
                     </div>
                     <div class="row mt-1 d-flex justify-content-evenly">
                         <div class="card px-0">
+                            <!-- percentage of completed project circle-->
+                            <div class="row percentage">
+                                <div class="col-auto">
+                                    <div class="circle">
+                                        <div class="inner-circle">
+                                            <div class="row d-flex  justify-content-center">
+                                                <div class="col">
+                                                    <p class="percentage">90%</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <a href="./modal.php">
                             <div class="card-img">
                                 <img src="./img/45.png" class="card-img-top" alt="...">
                             </div>
@@ -217,8 +272,23 @@ include('./include/sidebar.php');
                                 <h5 class="card-title">Area counting</h5>
                                 <p class="card-text">Hunsuru</p>
                             </div>
+                            </a>
                         </div>
                         <div class="card px-0">
+                            <div class="row percentage">
+                                <div class="col-auto">
+                                    <div class="circle">
+                                        <div class="inner-circle">
+                                            <div class="row d-flex  justify-content-center">
+                                                <div class="col">
+                                                    <p class="percentage">60%</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="./modal.php">
                             <div class="card-img">
                                 <img src="./img/44.png" class="card-img-top" alt="...">
                             </div>
@@ -226,8 +296,23 @@ include('./include/sidebar.php');
                                 <h5 class="card-title">Area counting</h5>
                                 <p class="card-text">Hunsuru</p>
                             </div>
+                            </a>
                         </div>
                         <div class="card px-0">
+                            <div class="row percentage">
+                                <div class="col-auto">
+                                    <div class="circle">
+                                        <div class="inner-circle">
+                                            <div class="row d-flex  justify-content-center">
+                                                <div class="col">
+                                                    <p class="percentage">100%</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="./modal.php">
                             <div class="card-img">
                                 <img src="./img/43.png" class="card-img-top" alt="...">
                             </div>
@@ -235,8 +320,23 @@ include('./include/sidebar.php');
                                 <h5 class="card-title">Area counting</h5>
                                 <p class="card-text">Hunsuru</p>
                             </div>
+                            </a>
                         </div>
                         <div class="card px-0">
+                            <div class="row percentage">
+                                <div class="col-auto">
+                                    <div class="circle">
+                                        <div class="inner-circle">
+                                            <div class="row d-flex  justify-content-center">
+                                                <div class="col">
+                                                    <p class="percentage">30%</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="./modal.php">
                             <div class="card-img">
                                 <img src="./img/45.png" class="card-img-top" alt="...">
                             </div>
@@ -244,6 +344,7 @@ include('./include/sidebar.php');
                                 <h5 class="card-title">Area counting</h5>
                                 <p class="card-text">Hunsuru</p>
                             </div>
+                            </a>
                         </div>
                     </div>
                     <div class="project-header">
@@ -251,6 +352,20 @@ include('./include/sidebar.php');
                     </div>
                     <div class="row mt-1 d-flex justify-content-evenly">
                         <div class="card px-0">
+                            <div class="row percentage">
+                                <div class="col-auto">
+                                    <div class="circle">
+                                        <div class="inner-circle">
+                                            <div class="row d-flex  justify-content-center">
+                                                <div class="col">
+                                                    <p class="percentage">40%</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="./modal.php">
                             <div class="card-img">
                                 <img src="./img/43.png" class="card-img-top" alt="...">
                             </div>
@@ -258,8 +373,23 @@ include('./include/sidebar.php');
                                 <h5 class="card-title">Area counting</h5>
                                 <p class="card-text">Hunsuru</p>
                             </div>
+                            </a>
                         </div>
                         <div class="card px-0">
+                            <div class="row percentage">
+                                <div class="col-auto">
+                                    <div class="circle">
+                                        <div class="inner-circle">
+                                            <div class="row d-flex  justify-content-center">
+                                                <div class="col">
+                                                    <p class="percentage">50%</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="./modal.php">
                             <div class="card-img">
                                 <img src="./img/45.png" class="card-img-top" alt="...">
                             </div>
@@ -267,8 +397,23 @@ include('./include/sidebar.php');
                                 <h5 class="card-title">Area counting</h5>
                                 <p class="card-text">Hunsuru</p>
                             </div>
+                            </a>
                         </div>
                         <div class="card px-0">
+                            <div class="row percentage">
+                                <div class="col-auto">
+                                    <div class="circle">
+                                        <div class="inner-circle">
+                                            <div class="row d-flex  justify-content-center">
+                                                <div class="col">
+                                                    <p class="percentage">70%</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="./modal.php">
                             <div class="card-img">
                                 <img src="./img/44.png" class="card-img-top" alt="...">
                             </div>
@@ -276,8 +421,23 @@ include('./include/sidebar.php');
                                 <h5 class="card-title">Area counting</h5>
                                 <p class="card-text">Hunsuru</p>
                             </div>
+                            </a>
                         </div>
                         <div class="card px-0">
+                            <div class="row percentage">
+                                <div class="col-auto">
+                                    <div class="circle">
+                                        <div class="inner-circle">
+                                            <div class="row d-flex  justify-content-center">
+                                                <div class="col">
+                                                    <p class="percentage">80%</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="./modal.php">
                             <div class="card-img">
                                 <img src="./img/45.png" class="card-img-top" alt="...">
                             </div>
@@ -285,6 +445,7 @@ include('./include/sidebar.php');
                                 <h5 class="card-title">Area counting</h5>
                                 <p class="card-text">Hunsuru</p>
                             </div>
+                            </a>
                         </div>
                     </div>
                 </div>

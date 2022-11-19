@@ -229,7 +229,7 @@
                         <h3 class="list-header">Porject</h3>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="../main/projects.php">
                             <div class="row">
                                 <div class="col-auto ps-1"><img src="./img/11-rmbg.png" alt=""></div>
                                 <div class="col-auto list-sub-header">Projects</div>
@@ -237,7 +237,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="../main/project-details.php">
                             <div class="row">
                                 <div class="col-auto ps-1"><img src="./img/task-rmbg.png" alt=""></div>
                                 <div class="col-auto list-sub-header">Project Details</div>
@@ -245,7 +245,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="../main/raw-files.php">
                             <div class="row">
                                 <div class="col-auto ps-1"><img src="./img/raw-rmbg.png" alt=""></div>
                                 <div class="col-auto list-sub-header">Raw Files</div>
@@ -262,7 +262,7 @@
                         <h3 class="list-header">Services</h3>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="../main/our-services.php">
                             <div class="row">
                                 <div class="col-auto ps-1"><img src="./img/our-serv-rmbg.png" alt=""></div>
                                 <div class="col-auto list-sub-header">Our Services</div>
@@ -270,7 +270,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="../main/our-services.php" onclick="showModal(); return false">
                             <div class="row">
                                 <div class="col-auto ps-1"><img src="./img/demo-rmbg.png" alt=""></div>
                                 <div class="col-auto list-sub-header">Request Demo</div>
@@ -278,7 +278,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="../main/our-services.php" onclick="showModal3(); return false">
                             <div class="row">
                                 <div class="col-auto ps-1"><img src="./img/quote-rmbg.png" alt=""></div>
                                 <div class="col-auto list-sub-header">Request Quote</div>
@@ -286,7 +286,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="../main/our-services.php" onclick="showModal2(); return false">
                             <div class="row">
                                 <div class="col-auto ps-1"><img src="./img/book-serv-rmbg.png" alt=""></div>
                                 <div class="col-auto list-sub-header">Request Services</div>

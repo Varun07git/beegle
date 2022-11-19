@@ -101,6 +101,12 @@
     .card-body {
         padding-bottom: 2px !important;
     }
+    .btn-services {
+        background-color: #0f7dff;
+        color: #fff;
+        padding: 10px 40px;
+        border-radius: 30px;
+    }
 </style>
 <!-- Page Content  -->
 <div id="content">
@@ -266,8 +272,20 @@
                         <div class="collapse px-0" id="collapseExample2">
                             <div class="collapsed-content">
                                 <div class="row">
-                                    <div class="col-6"><img src="./img/project-lower-part-1.png" alt=""></div>
-                                    <div class="col-6"><img src="./img/project-lower-part-2.png" alt=""></div>
+                                    <div class="col-6"><img src="./img/project-lower-part-1.png" alt="" width="100%" height="100%"></div>
+                                    <div class="col-6"><img src="./img/project-lower-part-2.png" alt="" width="100%" height="100%"></div>
+                                </div>
+                                <div class="row">
+                                    <!-- download button -->
+                                    <div class="col-6">
+                                        <div class="row d-flex justify-content-center">
+                                            <div class="col-auto">
+                                                <div class="input-group">
+                                                    <button class="btn btn-services" type="button" id="button-addon2">Download<img src="./img/91.png" alt="" width="20px" height="20px"></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
