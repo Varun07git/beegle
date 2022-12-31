@@ -1,4 +1,6 @@
-<?php include_once './include/header.php'; ?>
+<?php include_once './include/header.php';
+include('./include/dbconnect.php');
+?>
 <?php include_once './include/sidebar.php'; ?>
 <style>
     /* ---------------------------------------------------
@@ -101,6 +103,7 @@
     .card-body {
         padding-bottom: 2px !important;
     }
+
     .btn-services {
         background-color: #0f7dff;
         color: #fff;
@@ -110,6 +113,7 @@
 </style>
 <!-- Page Content  -->
 <div id="content">
+
     <div>
         <ul class="nav justify-content-end">
             <li class="nav-item px-2">
@@ -213,6 +217,14 @@
                 </div>
             </div>
         </div>
+        <?php
+        if (isset($_REQUEST['id'])) {
+            $id = $_REQUEST['id'];
+            $sql = "SELECT * FROM `projects` WHERE `ID` = '$id'";
+            $result = mysqli_query($conn, $sql);
+            $row = mysqli_fetch_assoc($result);
+        }
+        ?>
         <div class="row project-section">
             <div class="row mb-5">
                 <div class="col-6">
@@ -222,24 +234,24 @@
                     <div class="Project-Profile-content px-4">
                         <div class="row ms-3 mb-2">
                             <div class="col-3 me-1 project-content-box">Project</div>
-                            <div class="col-7 ms-1 project-content-box">Area Counting</div>
+                            <div class="col-7 ms-1 project-content-box"><?php echo $row['project_name']; ?></div>
                         </div>
                         <div class="row ms-3 mb-2">
                             <div class="col-3 me-1 project-content-box">Place</div>
-                            <div class="col-7 ms-1 project-content-box">Maragowdanahalli</div>
+                            <div class="col-7 ms-1 project-content-box"><?php echo $row['place']; ?></div>
                         </div>
                         <div class="row ms-3 mb-2">
                             <div class="col-3 me-1 project-content-box">Area</div>
                             <div class="col-7 ms-1">
                                 <div class="row d-flex justify-content-between">
-                                    <div class="col-5 project-content-box">800</div>
+                                    <div class="col-5 project-content-box"><?php echo $row['area']; ?></div>
                                     <div class="col-6 project-content-box">Acres</div>
                                 </div>
                             </div>
                         </div>
                         <div class="row ms-3">
-                            <div class="col-3 me-1 project-content-box">Project</div>
-                            <div class="col-7 ms-1 project-content-box">Area Counting</div>
+                            <div class="col-3 me-1 project-content-box">Status</div>
+                            <div class="col-7 ms-1 project-content-box"><?php echo $row['status']; ?></div>
                         </div>
                         <div class="row ms-3">
                             <a class="col-10 px-0 d-flex justify-content-end" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
@@ -251,7 +263,24 @@
                             </a>
                             <div class="collapse col-10 px-0" id="collapseExample">
                                 <div class="collapsed-content">
-                                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestiae illo, odio tempore sed distinctio qui quae adipisci dolor impedit nihil necessitatibus dolore enim quasi! Perferendis, repellat. Ab fuga nemo esse sit dolorem! Ratione dolores, temporibus exercitationem nesciunt libero doloremque modi quis nobis minus sapiente blanditiis nisi porro vero sequi ut quae, culpa tempore fugit eveniet voluptatibus ab ipsum, quos dolor. Eveniet iusto possimus ratione aspernatur nemo velit, porro perspiciatis qui! Consectetur saepe quam incidunt cum ad quasi aspernatur voluptas consequuntur? Modi inventore sint quaerat ducimus ipsum nesciunt facilis eligendi rerum tempora praesentium hic quas, aliquid perspiciatis vel pariatur mollitia exercitationem.
+                                    <pre><b>GPS Coordinates :</b> <?php echo $row['gps_coordinates']; ?>  (Lat, Long)
+<b>Total Area in Ha :</b> <?php echo ($row['area'] / 2.471); ?> Ha
+<b>Total Area in Acre :</b> <?php echo ($row['area']); ?> Acre
+<b>Village Perimeter :</b> 11.6Km
+<b>Crop area estimation for :</b> <?php echo ($row['crop_estimation']); ?>
+
+<b>Major crops in village :</b> <?php echo ($row['major_crop']); ?>
+
+<b>Image Size:</b> <?php echo ($row['image_size']); ?> Megapixel
+<b>Image Overlapping :</b> <?php echo ($row['image_overlapping']); ?>%
+<b>Flight height :</b> <?php echo ($row['flight_height']); ?>mtr (Majorly)
+<b>Images Collected :</b> <?php echo ($row['images_collected']); ?>+ ( 60+ GB )
+<b>Date of Scanning :</b> <?php echo ($row['date_scanning_start_date']); ?> to <?php echo ($row['date_scanning_end_date']); ?>
+
+<b>Data of Processing :</b> <?php echo ($row['date_processing_start_date']); ?> to <?php echo ($row['date_processing_end_date']); ?>
+
+<b>Date of Project Delivery :</b> <?php echo ($row['date_of_delivery']); ?>
+                                    </pre>
                                 </div>
                             </div>
                         </div>
@@ -268,31 +297,37 @@
                         <div class="project-header mt-2 d-flex justify-content-center">
                             <h3>Report</h3>
                         </div>
-                        <img src="./img/project-upper-part.png" alt="">
-                        <div class="collapse px-0" id="collapseExample2">
+                        <!-- embed pdf -->
+                        <div class="col-12">
+                            <embed src="../admin/<?php echo $row['report_file']; ?>#toolbar=0" type="application/pdf" width="100%" height="400px" />
+                        </div>
+                        <!-- pie chart js -->
+                        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+                        <script type="text/javascript">
+                            google.charts.load('current', {
+                                'packages': ['corechart']
+                            });
+                            google.charts.setOnLoadCallback(drawChart);
+
+                            function drawChart() {
+                                var data = google.visualization.arrayToDataTable([
+                                    <?php echo $row['pie_chart_values'];?>
+                                ]);
+                                var options = {
+                                    title: 'My Daily Activities'
+                                };
+                                var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+                                chart.draw(data, options);
+                            }
+                        </script>
+                        <div class="collapse mx-0 px-0" id="collapseExample2">
                             <div class="collapsed-content">
-                                <div class="row">
-                                    <div class="col-6"><img src="./img/project-lower-part-1.png" alt="" width="100%" height="100%"></div>
-                                    <div class="col-6"><img src="./img/project-lower-part-2.png" alt="" width="100%" height="100%"></div>
-                                </div>
-                                <div class="row">
-                                    <!-- download button -->
-                                    <div class="col-6">
-                                        <div class="row d-flex justify-content-center">
-                                            <div class="col-auto">
-                                                <div class="input-group">
-                                                    <button class="btn btn-services" type="button" id="button-addon2">Download<img src="./img/91.png" alt="" width="20px" height="20px"></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                    <div id="piechart" style="width: 100%; height: 200px !important;"></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
             <!-- download section -->
             <div class="row d-flex justify-content-evenly mt-5">
                 <div class="card px-0">
@@ -302,7 +337,7 @@
                     <div class="card-body px-0 py-1">
                         <div class="row">
                             <div class="col-8 mx-0 ms-2 px-0">
-                                <h5 class="card-title">Area counting</h5>
+                                <h5 class="card-title">Orthomozaic Map</h5>
                             </div>
                             <div class="col-3"><img src="./img/91.png" alt="" style="height: 30px;width: 30px;"></div>
                         </div>
@@ -315,7 +350,7 @@
                     <div class="card-body px-0 py-1">
                         <div class="row">
                             <div class="col-8 mx-0 ms-2 px-0">
-                                <h5 class="card-title">Area counting</h5>
+                                <h5 class="card-title">Villap Map</h5>
                             </div>
                             <div class="col-3"><img src="./img/91.png" alt="" style="height: 30px;width: 30px;"></div>
                         </div>
@@ -328,7 +363,7 @@
                     <div class="card-body px-0 py-1">
                         <div class="row">
                             <div class="col-8 mx-0 ms-2 px-0">
-                                <h5 class="card-title">Area counting</h5>
+                                <h5 class="card-title">Shape File</h5>
                             </div>
                             <div class="col-3"><img src="./img/91.png" alt="" style="height: 30px;width: 30px;"></div>
                         </div>
@@ -341,7 +376,7 @@
                     <div class="card-body px-0 py-1">
                         <div class="row">
                             <div class="col-8 mx-0 ms-2 px-0">
-                                <h5 class="card-title">Area counting</h5>
+                                <h5 class="card-title">Final Report</h5>
                             </div>
                             <div class="col-3"><img src="./img/91.png" alt="" style="height: 30px;width: 30px;"></div>
                         </div>

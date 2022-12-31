@@ -1,4 +1,6 @@
-<?php include_once './include/header.php'; ?>
+<?php include_once './include/header.php'; 
+include_once './include/dbconnect.php';
+?>
 <?php include_once './include/sidebar.php'; ?>
 <!-- Project DetailsTable -->
 <style type="text/css" media="print">
@@ -246,6 +248,13 @@
             <div class="row project-header mt-2">
                 <h3>Project Details</h3>
             </div>
+            <?php
+            // select project data from database
+            $sql2 = "SELECT * FROM `projects`";
+            $result2 = mysqli_query($conn, $sql2);
+            $num = mysqli_num_rows($result2);
+            if ($num > 0) {
+            ?>
             <div class="row">
                 <div class="no_print">
                     <p>
@@ -256,95 +265,53 @@
                     <thead>
                         <tr>
                             <!-- table check box -->
-                            <th><input type="checkbox" id="checkAll" onclick="checkAll()"></th>
                             <td><b>id</b></td>
                             <td><b>Project Name</b></td>
                             <td><b>Members</b></td>
                             <td><b>Deadline</b></td>
+                            <td><b>Client</b></td>
                             <td><b>Progress</b></td>
                             <td><b>Status</b></td>
                             <td><b>Action</b></td>
                         </tr>
                     </thead>
-                    <tr>
-                        <!-- check box -->
-                        <td><input type="checkbox" name="check" class="check"></td>
-                        <td>1</td>
-                        <td>Beegle Activities</td>
-                        <td><img src="./img/user.png" alt="" width="20px" height="20px"></td>
-                        <td>15-03-2022</td>
-                        <!-- progress bar -->
-                        <td>
-                            <div class="progress">
-                                <div class="progress-bar" role="progressbar" style="width: 65%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </td>
-                        <td><span class="status-circle status-circle-yellow"></span>On Hold</td>
-                        <!-- action button -->
-                        <td>
-                            <div class="dropdown">
-                                <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="./img/3.png" alt="" width="20px" height="20px" style="background-color: #0f7dff;">
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <li><a class="dropdown-item" href="#">Edit</a></li>
-                                    <li><a class="dropdown-item" href="#">Delete</a></li>
-                                </ul>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input type="radio"></td>
-                        <td>2</td>
-                        <td>Beegle Activities</td>
-                        <td><img src="./img/user.png" alt="" width="20px" height="20px"></td>
-                        <td>15-03-2022</td>
-                        <!-- progress bar -->
-                        <td>
-                            <div class="progress">
-                                <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </td>
-                        <td><span class="status-circle status-circle-yellow"></span> </td>
-                        <!-- action button -->
-                        <td>
-                            <div class="dropdown">
-                                <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="./img/3.png" alt="" width="20px" height="20px" style="background-color: #0f7dff;">
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <li><a class="dropdown-item" href="#">Edit</a></li>
-                                    <li><a class="dropdown-item" href="#">Delete</a></li>
-                                </ul>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input type="radio"></td>
-                        <td>3</td>
-                        <td>Beegle Activities</td>
-                        <td><img src="./img/user.png" alt="" width="20px" height="20px"></td>
-                        <td>15-03-2022</td>
-                        <!-- progress bar -->
-                        <td>
-                            <div class="progress">
-                                <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </td>
-                        <td><span class="status-circle status-circle-green"></span> In Progress</td>
-                        <!-- action button -->
-                        <td>
-                            <div class="dropdown">
-                                <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="./img/3.png" alt="" width="20px" height="20px" style="background-color: #0f7dff;">
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <li><a class="dropdown-item" href="#">Edit</a></li>
-                                    <li><a class="dropdown-item" href="#">Delete</a></li>
-                                </ul>
-                            </div>
-                        </td>
-                    </tr>
+                    <?php
+                        while ($row2 = mysqli_fetch_assoc($result2)) {
+                            $id = $row2['ID'];
+                            $name = $row2['project_name'];
+                            $members = $row2['project_member'];
+                            $deadline = $row2['project_end_date'];
+                            $client = $row2['project_client'];
+                            $progress = $row2['progress'];
+                            $status = $row2['status'];
+                            echo
+                            '<tr>
+                                <td>' . $id . '</td>
+                                <td>' . $name . '</td>
+                                <td>' . $members . '</td>
+                                <td>' . $deadline . '</td>
+                                <td>' . $client . '</td>
+                                <td>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" style="width:' . $progress . '%;" aria-valuenow="' . $progress . '" aria-valuemin="0" aria-valuemax="100">' . $progress . '%</div>
+                                    </div>
+                                </td>
+                                <td>' . $status . '</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <img src="./img/3.png" alt="" width="20px" height="20px" style="background-color: #0f7dff;">
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <li><a href="" class="dropdown-item">View</a></li>
+                                            <li><a class="dropdown-item" href="#">Delete</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>';
+                        }
+                    } ?>
+                   
                 </table>
             </div>
         </div>
