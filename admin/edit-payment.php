@@ -3,26 +3,28 @@ include_once './include/dbconnect.php';
 include_once './include/header.php';
 include_once './include/sidebar.php';
 
-if (isset($_REQUEST['addpayment'])) {
+if (isset($_REQUEST['save'])) {
+    $id = $_REQUEST['id'];
     $project = $_REQUEST['project'];
     $invoice = $_REQUEST['invoice'];
     $paidOn = $_REQUEST['paidOn'];
     $amount = $_REQUEST['amount'];
     $currency = $_REQUEST['currency'];
-    $transectionId = $_REQUEST['transection_id'];
-    $paymentGateway = $_REQUEST['payment_gateway'];
-    $remark = $_REQUEST['remark'];
-    // file upload
-    
-    $sql = "INSERT INTO `payments`(`project`, `invoice`, `paid_on`, `amount`, `currency`, `transection_id`, `payment_gateway`, `remark`) VALUES ('$project','$invoice','$paidOn','$amount','$currency','$transectionId','$paymentGateway','$remark')";
+    $transectionId = $_REQUEST['transectionId'];
+    $paymentGateway = $_REQUEST['paymentGateway'];
+    $paymentStatus = $_REQUEST['paymentStatus'];
+    $note = $_REQUEST['note'];
+
     $result = mysqli_query($conn, $sql);
     if ($result) {
-        echo "<script>alert('Payment Added Successfully');</script>";
+        echo "<script>alert('Payment Updated Successfully!')</script>";
     } else {
-        echo "<script>alert('Payment Not Added');</script>";
+        echo "<script>alert('Payment Not Updated!')</script>";
     }
 }
+
 ?>
+
 <style>
     .top-band {
         background-color: #f5f5f5;
@@ -30,7 +32,6 @@ if (isset($_REQUEST['addpayment'])) {
         border-bottom: 1px solid #e5e5e5;
     }
 
-    /* status circle */
     .status-circle {
         width: 10px;
         height: 10px;
@@ -64,13 +65,12 @@ if (isset($_REQUEST['addpayment'])) {
                     <i class='bx bx-menu'></i>
                 </div>
                 <div class="col-auto">
-                    <span class="text">Payments</span>
+                    <span class="text">Edit Task</span>
                 </div>
                 <div class="col-auto">
-                    <!-- add payment modal button -->
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addPaymentModal">
-                        <i class="bx bx-plus"></i> Add Payment
-                    </button>
+                    <!-- save and close button -->
+                    <a type="button" class="btn btn-outline-primary" href="./tasks.php">
+                        <i class='bx bx-undo'></i>Close</a>
                 </div>
                 <div class="col d-flex justify-content-end">
                     <ul class="list-unstyled list-inline">
@@ -92,24 +92,26 @@ if (isset($_REQUEST['addpayment'])) {
                     </ul>
                 </div>
             </div>
-            <!-- Add CRM client Modal to client account and company details -->
-            <div class="modal fade" id="addPaymentModal" tabindex="-1" aria-labelledby="addPaymentModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-xl">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="addPaymentModalLabel">Add Payment</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body px-5 py-5 ">
-                            <form>
-                                <!-- account details -->
-                                <h5 class="mb-3">Payment Details</h5>
-                                <div class="row mb-4">
-                                    <!-- project -->
-                                    <div class="col-4 mb-3">
+            <!-- edit Project -->
+            <div class="row my-5">
+                <div class="container">
+                    <form>
+                        <!-- account details -->
+                        <h5 class="mb-3">Payment Details</h5>
+                        <div class="row mb-4">
+                            <?php
+                             if (isset($_REQUEST['id'])) {
+                                 $id = $_REQUEST['id'];
+                                 $sql = "SELECT * FROM `payments` WHERE `id` = '$id'";
+                                 $result = mysqli_query($conn, $sql);
+                                 $row = mysqli_fetch_assoc($result);
+                             }
+                             ?>
+                             <!-- project -->
+                             <div class="col-4 mb-3">
                                         <label for="project" class="form-label">Project</label>
                                         <select class="form-select" aria-label="Default select example" name="project">
-                                            <option selected>--</option>
+                                            <option selected><?php echo $row['project']; ?></option>
                                             <?php $project = "SELECT * FROM `projects`";
                                             $project_result = mysqli_query($conn, $project);
                                             while ($projects_data = mysqli_fetch_assoc($project_result)) {
@@ -122,7 +124,7 @@ if (isset($_REQUEST['addpayment'])) {
                                     <div class="col-4 mb-3">
                                         <label for="invoice" class="form-label">Invoice</label>
                                         <select class="form-select" aria-label="Default select example" name="invoice">
-                                            <option selected>--</option>
+                                            <option selected><?php echo $row['invoice']; ?></option>
                                             <option value="1">Invoice 1</option>
                                             <option value="2">Invoice 2</option>
                                             <option value="3">Invoice 3</option>
@@ -134,18 +136,18 @@ if (isset($_REQUEST['addpayment'])) {
                                     <!-- paid on -->
                                     <div class="col-4 mb-3">
                                         <label for="paidOn" class="form-label">Paid On</label>
-                                        <input type="date" class="form-control" id="paidOn" aria-describedby="paidOn" name="paidOn">
+                                        <input type="date" class="form-control" id="paidOn" aria-describedby="paidOn" name="paidOn" value="<?php echo $row['paid_on']; ?>">
                                     </div>
                                     <!-- amount -->
                                     <div class="col-3 mb-3">
                                         <label for="amount" class="form-label">Amount</label>
-                                        <input type="text" class="form-control" id="amount" aria-describedby="amount" name="amount">
+                                        <input type="text" class="form-control" id="amount" aria-describedby="amount" name="amount" value="<?php echo $row['amount']; ?>">
                                     </div>
                                     <!-- currency -->
                                     <div class="col-3 mb-3">
                                         <label for="currency" class="form-label">Currency</label>
                                         <select class="form-select" aria-label="Default select example" name="currency">
-                                            <option selected>--</option>
+                                            <option selected><?php echo $row['currency']; ?></option>
                                             <?php
                                             $currency = "SELECT * FROM `currency`";
                                             $currency_result = mysqli_query($conn, $currency);
@@ -158,19 +160,19 @@ if (isset($_REQUEST['addpayment'])) {
                                     <!-- Transection Id -->
                                     <div class="col-3 mb-3">
                                         <label for="transectionId" class="form-label">Transection Id</label>
-                                        <input type="text" class="form-control" id="transectionId" aria-describedby="transectionId" name="transection_id">
+                                        <input type="text" class="form-control" id="transectionId" aria-describedby="transectionId" name="transection_id" value="<?php echo $row['transection_id']; ?>">
                                     </div>
                                     <!-- Payment gateway -->
                                     <div class="col-3 mb-3">
                                         <label for="paymentGateway" class="form-label">Payment Gateway</label>
                                         <select class="form-select" aria-label="Default select example" name="payment_gateway">
-                                            <option selected>--</option>
-                                            <option value="1">Paypal</option>
-                                            <option value="2">Stripe</option>
-                                            <option value="3">Paystack</option>
-                                            <option value="4">Flutterwave</option>
-                                            <option value="5">Rave</option>
-                                            <option value="6">Payoneer</option>
+                                            <option selected><?php echo $row['payment_gateway']; ?></option>
+                                            <option value="Paypal">Paypal</option>
+                                            <option value="Stripe">Stripe</option>
+                                            <option value="Paystack">Paystack</option>
+                                            <option value="Flutterwave">Flutterwave</option>
+                                            <option value="Rave">Rave</option>
+                                            <option value="Payoneer">Payoneer</option>
                                         </select>
                                     </div>
 
@@ -183,62 +185,11 @@ if (isset($_REQUEST['addpayment'])) {
                                     <!-- Remark textarea -->
                                     <div class="col-12 mb-3">
                                         <label for="remark" class="form-label">Remark</label>
-                                        <textarea class="form-control" id="remark" rows="3" name="remark"></textarea>
+                                        <textarea class="form-control" id="remark" rows="3" name="remark"><?php echo $row['remark']; ?></textarea>
                                     </div>
-                                </div>
-                                <button type="submit" class="btn btn-primary" name="addpayment">Submit</button>
-                            </form>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <?php
-            $sql2 = "SELECT * FROM `payments`";
-            $result2 = mysqli_query($conn, $sql2);
-            $num = mysqli_num_rows($result2);
-            if ($num > 0) {
-            ?>
-            <!-- task box stars -->
-            <div class="row mt-3">
-                <div class="col-12">
-                    <table id="mytable" class="display project-table" style="width: 100%;">
-                        <thead>
-                            <tr>
-                                <td><b>Id</b></td>
-                                <td><b>Project</b></td>
-                                <td><b>Invoice</b></td>
-                                <td><b>Amount</b></td>
-                                <td><b>Paid On</b></td>
-                                <td><b>Status</b></td>
-                                <td><b>Action</b></td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            while ($row = mysqli_fetch_assoc($result2)) {
-                                echo "<tr>
-                                <td>" . $row['id'] . "</td>
-                                <td>" . $row['project'] . "</td>
-                                <td>" . $row['invoice'] . "</td>
-                                <td>" . $row['amount'] . "</td>
-                                <td>" . $row['paid_on'] . "</td>";
-                                if($row['status'] == 'paid'){
-                                     echo "<td><span class='badge bg-success'>Paid</span></td>";
-                                }else{
-                                    echo "<td><span class='badge bg-warning'>Pending</span></td>";
-                                }
-                                echo"
-                                <td>
-                                    <a href='#' class='btn btn-sm btn-primary'><i class='fas fa-eye'></i></a>
-                                    <a href='#' class='btn btn-sm btn-warning'><i class='fas fa-edit'></i></a>
-                                    <a href='#' class='btn btn-sm btn-danger'><i class='fas fa-trash'></i></a>
-                                </td>
-                            </tr>";
-                            }
-                        }
-                            ?>
-                        </tbody>
-                    </table>
+                        <button type="submit" class="btn btn-primary" name="save">Submit</button>
+                    </form>
                 </div>
             </div>
         </div>

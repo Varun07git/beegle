@@ -1,5 +1,9 @@
-<?php include_once './include/header.php'; ?>
-<?php include_once './include/sidebar.php'; ?>
+<?php
+include_once './include/dbconnect.php';
+include_once './include/header.php'; 
+include_once './include/sidebar.php';
+
+?>
 <style>
     .top-band {
         background-color: #f5f5f5;
@@ -80,129 +84,118 @@
                         <div class="modal-body px-5 py-5 ">
                             <form>
                                 <!-- account details -->
-                                    <div class="row mb-4">
-                                        <!-- Estimate Number -->
-                                        <div class="col-4 mb-3">
-                                            <label for="estimateNumber" class="form-label">Estimate Number</label>
-                                            <input type="text" class="form-control" id="estimateNumber" aria-describedby="estimateNumber">
-                                        </div>
-                                        <!-- valid till -->
-                                        <div class="col-4 mb-3">
-                                            <label for="validTill" class="form-label">Valid Till</label>
-                                            <input type="date" class="form-control" id="validTill" aria-describedby="validTill">
-                                        </div>
-                                        <!-- currency -->
-                                        <div class="col-4 mb-3">
-                                            <label for="currency" class="form-label">Currency</label>
-                                            <select class="form-select" aria-label="Default select example">
-                                                <option selected>--</option>
-                                                <option value="1">USD</option>
-                                                <option value="2">EUR</option>
-                                                <option value="3">GBP</option>
-                                                <option value="4">INR</option>
-                                                <option value="5">AUD</option>
-                                                <option value="6">CAD</option>
-                                            </select>
-                                        </div>
-                                        <!-- client -->
-                                        <div class="col-4 mb-3">
-                                            <label for="client" class="form-label">Client</label>
-                                            <select class="form-select" aria-label="Default select example">
-                                                <option selected>--</option>
-                                                <option value="1">Client 1</option>
-                                                <option value="2">Client 2</option>
-                                                <option value="3">Client 3</option>
-                                                <option value="4">Client 4</option>
-                                                <option value="5">Client 5</option>
-                                                <option value="6">Client 6</option>
-                                            </select>
-                                        </div>
-                                        <!-- calculate tax -->
-                                        <div class="col-4 mb-3">
-                                            <label for="calculateTax" class="form-label">Calculate Tax</label>
-                                            <select class="form-select" aria-label="Default select example">
-                                                <option selected>--</option>
-                                                <option value="1">After Discount</option>
-                                                <option value="2">Before Discount</option>
-                                            </select>
-                                        </div>
-                                        <!-- description textarea -->
-                                        <div class="col-12 mb-3">
-                                            <label for="description" class="form-label">Description</label>
-                                            <textarea class="form-control" id="description" rows="3"></textarea>
-                                        </div>
-                                        <!-- select product -->
-                                        <div class="col-12 mb-3">
-                                            <label for="selectProduct" class="form-label">Select Product</label>
-                                            <select class="form-select" aria-label="Default select example">
-                                                <option selected>--</option>
-                                                <option value="1">Product 1</option>
-                                                <option value="2">Product 2</option>
-                                                <option value="3">Product 3</option>
-                                                <option value="4">Product 4</option>
-                                                <option value="5">Product 5</option>
-                                                <option value="6">Product 6</option>
-                                            </select>
-                                        </div>
-                                        <!-- Description table with input fields -->
-                                        <div class="col-12 mb-3">
-                                            <table class="table table-bordered">
-                                                <thead>
-                                                    <tr>
-                                                        <th scope="col">Product</th>
-                                                        <th scope="col">Description</th>
-                                                        <th scope="col">Qty/Hrs</th>
-                                                        <th scope="col">Unit Price</th>
-                                                        <th scope="col">Tax</th>
-                                                        <th scope="col">Amount</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            <select class="form-select" aria-label="Default select example">
-                                                                <option selected>--</option>
-                                                                <option value="1">Product 1</option>
-                                                                <option value="2">Product 2</option>
-                                                                <option value="3">Product 3</option>
-                                                                <option value="4">Product 4</option>
-                                                                <option value="5">Product 5</option>
-                                                                <option value="6">Product 6</option>
-                                                            </select>
-                                                        </td>
-                                                        <td>
-                                                            <textarea class="form-control" id="description" rows="3"></textarea>
-                                                        </td>
-                                                        <td>
-                                                            <input type="text" class="form-control" id="quantity" aria-describedby="quantity">
-                                                        </td>
-                                                        <td>
-                                                            <input type="text" class="form-control" id="rate" aria-describedby="rate">
-                                                        </td>
-                                                        <td>
-                                                            <select class="form-select" aria-label="Default select example">
-                                                                <option selected>--</option>
-                                                                <option value="1">Tax 1</option>
-                                                                <option value="2">Tax 2</option>
-                                                                <option value="3">Tax 3</option>
-                                                                <option value="4">Tax 4</option>
-                                                                <option value="5">Tax 5</option>
-                                                                <option value="6">Tax 6</option>
-                                                            </select>
-                                                        </td>
-                                                        <td>
-                                                            <input type="text" class="form-control" id="amount" aria-describedby="amount">
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <!-- add row button -->
-                                        <div class="col-12 mb-3">
-                                            <button type="button" class="btn btn-primary">Add Row</button>
-                                        </div>
-                                        <!-- total amount -->
-                                        <div class="col-12 mb-3">
+                                <div class="row mb-4">
+                                    <!-- Estimate Number -->
+                                    <div class="col-4 mb-3">
+                                        <label for="estimateNumber" class="form-label">Estimate Number</label>
+                                        <input type="text" class="form-control" id="estimateNumber" aria-describedby="estimateNumber">
+                                    </div>
+                                    <!-- valid till -->
+                                    <div class="col-4 mb-3">
+                                        <label for="validTill" class="form-label">Valid Till</label>
+                                        <input type="date" class="form-control" id="validTill" aria-describedby="validTill">
+                                    </div>
+                                    <!-- currency -->
+                                    <div class="col-4 mb-3">
+                                        <label for="currency" class="form-label">Currency</label>
+                                        <select class="form-select" aria-label="Default select example">
+                                            <option selected>--</option>
+                                            <option value="1">USD</option>
+                                            <option value="2">EUR</option>
+                                            <option value="3">GBP</option>
+                                            <option value="4">INR</option>
+                                            <option value="5">AUD</option>
+                                            <option value="6">CAD</option>
+                                        </select>
+                                    </div>
+                                    <!-- client -->
+                                    <div class="col-4 mb-3">
+                                        <label for="client" class="form-label">Client</label>
+                                        <select class="form-select" aria-label="Default select example">
+                                            <option selected>--</option>
+                                            <option value="1">Client 1</option>
+                                            <option value="2">Client 2</option>
+                                            <option value="3">Client 3</option>
+                                            <option value="4">Client 4</option>
+                                            <option value="5">Client 5</option>
+                                            <option value="6">Client 6</option>
+                                        </select>
+                                    </div>
+                                    <!-- calculate tax -->
+                                    <div class="col-4 mb-3">
+                                        <label for="calculateTax" class="form-label">Calculate Tax</label>
+                                        <select class="form-select" aria-label="Default select example">
+                                            <option selected>--</option>
+                                            <option value="1">After Discount</option>
+                                            <option value="2">Before Discount</option>
+                                        </select>
+                                    </div>
+                                    <!-- description textarea -->
+                                    <div class="col-12 mb-3">
+                                        <label for="description" class="form-label">Description</label>
+                                        <textarea class="form-control" id="description" rows="3"></textarea>
+                                    </div>
+                                    <!-- Description table with input fields -->
+                                    <div class="col-12 mb-3">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Product</th>
+                                                    <th scope="col">Description</th>
+                                                    <th scope="col">Qty/Hrs</th>
+                                                    <th scope="col">Unit Price</th>
+                                                    <th scope="col">Tax</th>
+                                                    <th scope="col">Amount</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <select class="form-select" aria-label="Default select example">
+                                                            <option selected>--</option>
+                                                            <option value="1">Product 1</option>
+                                                            <option value="2">Product 2</option>
+                                                            <option value="3">Product 3</option>
+                                                            <option value="4">Product 4</option>
+                                                            <option value="5">Product 5</option>
+                                                            <option value="6">Product 6</option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <textarea class="form-control" id="description" rows="3"></textarea>
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control" id="quantity" aria-describedby="quantity">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control" id="rate" aria-describedby="rate">
+                                                    </td>
+                                                    <td>
+                                                        <select class="form-select" aria-label="Default select example">
+                                                            <option selected>--</option>
+                                                            <option value="1">Tax 1</option>
+                                                            <option value="2">Tax 2</option>
+                                                            <option value="3">Tax 3</option>
+                                                            <option value="4">Tax 4</option>
+                                                            <option value="5">Tax 5</option>
+                                                            <option value="6">Tax 6</option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control" id="amount" aria-describedby="amount">
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- add row button -->
+                                    <div class="col-12 mb-3">
+                                        <button type="button" class="btn btn-primary">Add Row</button>
+                                    </div>
+                                    <!-- total amount inline inputs-->
+
+                                    <div class="row justify-content-end">
+                                        <div class="col-6 mb-3">
                                             <table class="table table-bordered">
                                                 <thead>
                                                     <tr>
@@ -230,18 +223,19 @@
                                                 </tbody>
                                             </table>
                                         </div>
-                                        <!-- Note for recipient -->
-                                        <div class="col-6 mb-3">
-                                            <label for="note" class="form-label">Note for Recipient</label>
-                                            <textarea class="form-control" id="note" rows="3"></textarea>
-                                        </div>
-                                        <!-- Term and Conditions with palceholder -->
-                                        <div class="col-6 mb-3">
-                                            <label for="terms" class="form-label">Terms and Conditions</label>
-                                            <textarea class="form-control" id="terms" rows="3"></textarea>
-                                        </div>
                                     </div>
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <!-- Note for recipient -->
+                                    <div class="col-6 mb-3">
+                                        <label for="note" class="form-label">Note for Recipient</label>
+                                        <textarea class="form-control" id="note" rows="3"></textarea>
+                                    </div>
+                                    <!-- Term and Conditions with palceholder -->
+                                    <div class="col-6 mb-3">
+                                        <label for="terms" class="form-label">Terms and Conditions</label>
+                                        <textarea class="form-control" id="terms" rows="3"></textarea>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
                             </form>
                         </div>
                     </div>
