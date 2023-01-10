@@ -1,0 +1,42 @@
+##CICD Workflow:: 4 Job: `arcion_test`,`arcion_master`,`informatica_test`,`informatica_master`. 
+## Workflow: if any file changes in arcion directory in test branch,then `arcion_test` job will get triggered.Similarly if any file changes in inforrmatica dir in test branch then `informatica_test` job will get triggered.
+
+arcion_test:
+  environment: test
+  script:
+    - chmod 400 $SSH_KEY_4px2_learning_1_4pointx_com
+    - ssh -i $SSH_KEY_4px2_learning_1_4pointx_com -o stricthostkeychecking=no 4px2@learning-14pointx.com "pwd ; cd ~/tcl-test-repo; sudo rm -rf tcl-cicd-demo; git init; git status; git clone -b test"
+  only:
+    - changes:
+      - arcion/**/* 
+
+
+informatica_test:
+  environment: test
+  script:
+    - chmod 400 $SSH_KEY_4px2_learning_1_4pointx_com
+    - ssh -i $SSH_KEY_4px2_learning_1_4pointx_com -o stricthostkeychecking=no 4px2@learning-14pointx.com "pwd ; cd ~/tcl-test-repo; sudo rm -rf tcl-cicd-demo; git init; git status; git clone -b test"
+
+  only:
+    - changes:
+      - informatica/**/*
+
+arcion_master:
+  environment: production
+  script:
+    - chmod 400 $SSH_KEY_4px2_learning_1_4pointx_com
+    - ssh -i $SSH_KEY_4px2_learning_1_4pointx_com -o stricthostkeychecking=no 4px2@learning-14pointx.com "pwd ; cd ~/tcl-master-repo; sudo rm -rf tcl-cicd-demo; git init; git status; git clone -b master"
+
+  only:
+    - changes:
+      - arcion/**/*
+
+informatica_master:
+  environment: production
+  script:
+    - chmod 400 $SSH_KEY_4px2_learning_1_4pointx_com
+    - ssh -i $SSH_KEY_4px2_learning_1_4pointx_com -o stricthostkeychecking=no 4px2@learning-14pointx.com "pwd ; cd ~/tcl-master-repo; sudo rm -rf tcl-cicd-demo; git init; git status; git clone -b master"
+
+  only:
+    - changes:
+      - informatica/**/*

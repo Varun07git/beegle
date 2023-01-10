@@ -1,7 +1,29 @@
 <?php
 include_once './include/dbconnect.php';
-include_once './include/header.php'; 
+include_once './include/header.php';
 include_once './include/sidebar.php';
+if (isset($_REQUEST['addQuotation'])) {
+    $EstimateNumber = $_REQUEST['estimate_number'];
+    $ValidTill = $_REQUEST['valid_till'];
+    $Currency = $_REQUEST['currency'];
+    $Client = $_REQUEST['client'];
+    $CalculateTax = $_REQUEST['calculate_tax'];
+    $quotation_description = $_REQUEST['quotation_description'];
+    $product = $_REQUEST['product'];
+    $description = $_REQUEST['desc'];
+    $quantity = $_REQUEST['quantity'];
+    $rate = $_REQUEST['rate'];
+    $tax = $_REQUEST['tax'];
+    $amount = $_REQUEST['amount'];
+    $subTotal = $_REQUEST['sub_total'];
+    $discount = $_REQUEST['discount'];
+    $Total = $_REQUEST['total'];
+    $note = $_REQUEST['note'];
+    $terms = $_REQUEST['terms'];
+
+    $sql = "INSERT INTO `quotation`(`estimate_number`, `valid_till`, `currency`, `client`, `calculate_tax`, `quotation_description`, `product`, `description`, `quantity`, `rate`, `tax`, `amount`, `sub_total`, `discount`, `total`, `note`, `terms`) VALUES ('$EstimateNumber','$ValidTill','$Currency','$Client','$CalculateTax','$quotation_description','$product','$description','$quantity','$rate','$tax','$amount','$subTotal','$discount','$Total','$note','$terms')";
+}
+
 
 ?>
 <style>
@@ -88,43 +110,45 @@ include_once './include/sidebar.php';
                                     <!-- Estimate Number -->
                                     <div class="col-4 mb-3">
                                         <label for="estimateNumber" class="form-label">Estimate Number</label>
-                                        <input type="text" class="form-control" id="estimateNumber" aria-describedby="estimateNumber">
+                                        <input type="text" class="form-control" id="estimateNumber" name="estimate_number" aria-describedby="estimateNumber">
                                     </div>
                                     <!-- valid till -->
                                     <div class="col-4 mb-3">
                                         <label for="validTill" class="form-label">Valid Till</label>
-                                        <input type="date" class="form-control" id="validTill" aria-describedby="validTill">
+                                        <input type="date" class="form-control" id="validTill" name="valid_till" aria-describedby="validTill">
                                     </div>
                                     <!-- currency -->
                                     <div class="col-4 mb-3">
                                         <label for="currency" class="form-label">Currency</label>
-                                        <select class="form-select" aria-label="Default select example">
+                                        <select class="form-select" name="currency" aria-label="Default select example">
                                             <option selected>--</option>
-                                            <option value="1">USD</option>
-                                            <option value="2">EUR</option>
-                                            <option value="3">GBP</option>
-                                            <option value="4">INR</option>
-                                            <option value="5">AUD</option>
-                                            <option value="6">CAD</option>
+                                            <?php
+                                            $currency = "SELECT * FROM `currency`";
+                                            $currency_result = mysqli_query($conn, $currency);
+                                            while ($currency_data = mysqli_fetch_assoc($currency_result)) {
+                                                echo "<option value='" . $currency_data['currency_name'] . "'>" . $currency_data['currency_name'] . "</option>";
+                                            }
+                                            ?>
                                         </select>
                                     </div>
                                     <!-- client -->
                                     <div class="col-4 mb-3">
                                         <label for="client" class="form-label">Client</label>
-                                        <select class="form-select" aria-label="Default select example">
+                                        <select class="form-select" name="client" aria-label="Default select example">
                                             <option selected>--</option>
-                                            <option value="1">Client 1</option>
-                                            <option value="2">Client 2</option>
-                                            <option value="3">Client 3</option>
-                                            <option value="4">Client 4</option>
-                                            <option value="5">Client 5</option>
-                                            <option value="6">Client 6</option>
+                                            <?php
+                                            $client = "SELECT * FROM `clients`";
+                                            $client_result = mysqli_query($conn, $client);
+                                            while ($client_data = mysqli_fetch_assoc($client_result)) {
+                                                echo "<option value='" . $client_data['client_name'] . "'>" . $client_data['client_name'] . "</option>";
+                                            }
+                                            ?>
                                         </select>
                                     </div>
                                     <!-- calculate tax -->
                                     <div class="col-4 mb-3">
-                                        <label for="calculateTax" class="form-label">Calculate Tax</label>
-                                        <select class="form-select" aria-label="Default select example">
+                                        <label for="calculateTax" class="form-label"></label>
+                                        <select class="form-select" name="calculate_tax" aria-label="Default select example">
                                             <option selected>--</option>
                                             <option value="1">After Discount</option>
                                             <option value="2">Before Discount</option>
@@ -133,7 +157,7 @@ include_once './include/sidebar.php';
                                     <!-- description textarea -->
                                     <div class="col-12 mb-3">
                                         <label for="description" class="form-label">Description</label>
-                                        <textarea class="form-control" id="description" rows="3"></textarea>
+                                        <textarea class="form-control" name="quotation_description" id="description" rows="3"></textarea>
                                     </div>
                                     <!-- Description table with input fields -->
                                     <div class="col-12 mb-3">
@@ -153,12 +177,13 @@ include_once './include/sidebar.php';
                                                     <td>
                                                         <select class="form-select" aria-label="Default select example">
                                                             <option selected>--</option>
-                                                            <option value="1">Product 1</option>
-                                                            <option value="2">Product 2</option>
-                                                            <option value="3">Product 3</option>
-                                                            <option value="4">Product 4</option>
-                                                            <option value="5">Product 5</option>
-                                                            <option value="6">Product 6</option>
+                                                            <?php 
+                                                            $product = "SELECT * FROM `products`";
+                                                            $product_result = mysqli_query($conn, $product);
+                                                            while ($product_data = mysqli_fetch_assoc($product_result)) {
+                                                                echo "<option value='" . $product_data['product_name'] . "'>" . $product_data['product_name'] . "</option>";
+                                                            }
+                                                            ?>
                                                         </select>
                                                     </td>
                                                     <td>
@@ -168,17 +193,18 @@ include_once './include/sidebar.php';
                                                         <input type="text" class="form-control" id="quantity" aria-describedby="quantity">
                                                     </td>
                                                     <td>
-                                                        <input type="text" class="form-control" id="rate" aria-describedby="rate">
+                                                        <input type="text" class="form-control" id="rate" name="rate" aria-describedby="rate">
                                                     </td>
                                                     <td>
                                                         <select class="form-select" aria-label="Default select example">
                                                             <option selected>--</option>
-                                                            <option value="1">Tax 1</option>
-                                                            <option value="2">Tax 2</option>
-                                                            <option value="3">Tax 3</option>
-                                                            <option value="4">Tax 4</option>
-                                                            <option value="5">Tax 5</option>
-                                                            <option value="6">Tax 6</option>
+                                                            <?php
+                                                            $tax = "SELECT * FROM tax";
+                                                            $tax_result = mysqli_query($conn, $tax);
+                                                            while ($tax_row = mysqli_fetch_assoc($tax_result)) {
+                                                                echo "<option value=" . $tax_row['rate'] . ">" . $tax_row['tax_name'] . " " . $tax_row['rate'] . "%</option>";
+                                                            }
+                                                            ?>
                                                         </select>
                                                     </td>
                                                     <td>
@@ -235,7 +261,7 @@ include_once './include/sidebar.php';
                                         <textarea class="form-control" id="terms" rows="3"></textarea>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-primary" name="addQuotation">Submit</button>
                             </form>
                         </div>
                     </div>

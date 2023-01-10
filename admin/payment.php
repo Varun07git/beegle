@@ -13,7 +13,7 @@ if (isset($_REQUEST['addpayment'])) {
     $paymentGateway = $_REQUEST['payment_gateway'];
     $remark = $_REQUEST['remark'];
     // file upload
-    
+
     $sql = "INSERT INTO `payments`(`project`, `invoice`, `paid_on`, `amount`, `currency`, `transection_id`, `payment_gateway`, `remark`) VALUES ('$project','$invoice','$paidOn','$amount','$currency','$transectionId','$paymentGateway','$remark')";
     $result = mysqli_query($conn, $sql);
     if ($result) {
@@ -198,22 +198,22 @@ if (isset($_REQUEST['addpayment'])) {
             $num = mysqli_num_rows($result2);
             if ($num > 0) {
             ?>
-            <!-- task box stars -->
-            <div class="row mt-3">
-                <div class="col-12">
-                    <table id="mytable" class="display project-table" style="width: 100%;">
-                        <thead>
-                            <tr>
-                                <td><b>Id</b></td>
-                                <td><b>Project</b></td>
-                                <td><b>Invoice</b></td>
-                                <td><b>Amount</b></td>
-                                <td><b>Paid On</b></td>
-                                <td><b>Status</b></td>
-                                <td><b>Action</b></td>
-                            </tr>
-                        </thead>
-                        <tbody>
+                <!-- task box stars -->
+                <div class="row mt-3">
+                    <div class="col-12">
+                        <table id="mytable" class="display project-table" style="width: 100%;">
+                            <thead>
+                                <tr>
+                                    <td><b>Id</b></td>
+                                    <td><b>Project</b></td>
+                                    <td><b>Invoice</b></td>
+                                    <td><b>Amount</b></td>
+                                    <td><b>Paid On</b></td>
+                                    <td><b>Status</b></td>
+                                    <td><b>Action</b></td>
+                                </tr>
+                            </thead>
+                            <tbody>
                             <?php
                             while ($row = mysqli_fetch_assoc($result2)) {
                                 echo "<tr>
@@ -222,25 +222,35 @@ if (isset($_REQUEST['addpayment'])) {
                                 <td>" . $row['invoice'] . "</td>
                                 <td>" . $row['amount'] . "</td>
                                 <td>" . $row['paid_on'] . "</td>";
-                                if($row['status'] == 'paid'){
-                                     echo "<td><span class='badge bg-success'>Paid</span></td>";
-                                }else{
-                                    echo "<td><span class='badge bg-warning'>Pending</span></td>";
+                                if ($row['payment_status'] == 'paid') {
+                                    echo "<td><span class='badge bg-success'>Paid</span></td>";
+                                } elseif ($row['payment_status'] == 'partial') {
+                                    echo "<td><span class='badge bg-warning'>Partial</span></td>";
+                                } else {
+                                    echo "<td><span class='badge bg-danger'>Unpaid</span></td>";
                                 }
-                                echo"
+                                echo "
                                 <td>
-                                    <a href='#' class='btn btn-sm btn-primary'><i class='fas fa-eye'></i></a>
-                                    <a href='#' class='btn btn-sm btn-warning'><i class='fas fa-edit'></i></a>
-                                    <a href='#' class='btn btn-sm btn-danger'><i class='fas fa-trash'></i></a>
+                                <div class='dropdown'>
+                                <button class='btn btn-light dropdown-toggle' type='button' id='dropdownMenuButton' data-bs-toggle='dropdown' aria-expanded='false'>
+                                        <img src='./img/3.png' alt='' width='20px' height='20px' style='background-color: #0f7dff;'>
+                                </button>
+                                <ul class='dropdown-menu' aria-labelledby='dropdownMenuButton'>
+                                    
+                                <li><a href='edit-payment.php?id=" . $row['id'] . "' class='dropdown-item'>Edit</a></li>
+                                <li><a class='dropdown-item' href='edit-payment.php?id=" . $row['id'] . "'>Delete</a></li>
+                                <li><a href='' class='dropdown-item'>View</a></li>
+                                </ul>
+                                </div>
                                 </td>
                             </tr>";
                             }
                         }
                             ?>
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
         </div>
     </div>
 </section>

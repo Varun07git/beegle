@@ -190,10 +190,19 @@ if (isset($_REQUEST['addclient'])) {
                                         </div>
                                         <div class="col-3">
                                             <label for="clientStatus" class="form-label">Client Category</label>
+                                            <div class="input-group">
                                             <select class="form-select" aria-label="Default select example" name="client_category">
                                                 <option selected>--</option>
-
+                                                <?php
+                                                $clientCategory = "SELECT * FROM client_category";
+                                                $clientCategoryResult = mysqli_query($conn, $clientCategory);
+                                                while ($clientCategoryRow = mysqli_fetch_assoc($clientCategoryResult)) {
+                                                    echo "<option value='" . $clientCategoryRow['category'] . "'>" . $clientCategoryRow['category'] . "</option>";
+                                                }
+                                                ?>
                                             </select>
+                                            <button class="btn btn-outline-secondary" type="button" name="addcategory">add</button>
+                                            </div>
                                         </div>
                                         <div class="col-3">
                                             <label for="clientStatus" class="form-label">Client Sub Category</label>

@@ -1,5 +1,22 @@
+<?php include_once './include/dbconnect.php'; ?>
 <?php include_once './include/header.php'; ?>
 <?php include_once './include/sidebar.php'; ?>
+<?php
+if (isset($_REQUEST['addTicket'])){
+    $requester = $_REQUEST['requester'];
+    $client = $_REQUEST['client'];
+    $subject = $_REQUEST['subject'];
+    $description = $_REQUEST['description'];
+    
+    $sql = "INSERT INTO `ticket`(`requester`, `requester_name`, `requested_on`,`subject`, `description`) VALUES ('$requester', '$client', NOW(),'$subject', '$description')";
+    $result = mysqli_query($conn, $sql);
+    if ($result){
+        echo "<script>alert('Ticket added successfully');</script>";
+    }else{
+        echo "<script>alert('Ticket not added');</script>";
+    }
+}
+?>
 <style>
     .top-band {
         background-color: #f5f5f5;
@@ -104,28 +121,29 @@
                                     <!-- requester -->
                                     <div class="col-4 mb-3">
                                         <label for="requester" class="form-label">Requester</label>
-                                        <select class="form-select" aria-label="Default select example">
+                                        <select class="form-select" name="client" aria-label="Default select example">
                                             <option selected>--</option>
-                                            <option value="1">Client 1</option>
-                                            <option value="2">Client 2</option>
-                                            <option value="3">Client 3</option>
-                                            <option value="4">Client 4</option>
-                                            <option value="5">Client 5</option>
-                                            <option value="6">Client 6</option>
+                                            <?php
+                                            $sql = "SELECT * FROM clients";
+                                            $result = mysqli_query($conn, $sql);
+                                            while ($row = mysqli_fetch_assoc($result)){
+                                                echo "<option value='".$row['client_name']."'>".$row['client_name']."</option>";
+                                            }
+                                            ?>
                                         </select>
                                     </div>
                                     <!-- Ticket subject -->
                                     <div class="col-12 mb-3">
                                         <label for="subject" class="form-label">Subject</label>
-                                        <input type="text" class="form-control" id="subject" placeholder="Subject">
+                                        <input type="text" class="form-control" id="subject" placeholder="Subject" name="subject">
                                     </div>
                                     <!-- Ticket description -->
                                     <div class="col-12 mb-3">
                                         <label for="description" class="form-label">Description</label>
-                                        <textarea class="form-control" id="description" rows="3"></textarea>
-                                    </div> 
+                                        <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                                    </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-primary" name="addTicket">Submit</button>
                             </form>
                         </div>
                     </div>
@@ -141,7 +159,14 @@
                             <div class="row">
                                 <div class="col-8">
                                     <h6 class="card-title">Total Tickets</h6>
-                                    <p class="card-text">0</p>
+                                    <p class="card-text">
+                                        <?php
+                                        $sql = "SELECT * FROM ticket";
+                                        $result = mysqli_query($conn, $sql);
+                                        $totalTickets = mysqli_num_rows($result);
+                                        echo $totalTickets;
+                                        ?>
+                                    </p>
                                 </div>
                                 <div class="col-4 px-3 py-4">
                                     <!-- fontawsome ticket icon -->
@@ -158,7 +183,14 @@
                             <div class="row">
                                 <div class="col-8">
                                     <h6 class="card-title">Open Tickets</h6>
-                                    <p class="card-text">0</p>
+                                    <p class="card-text">
+                                        <?php
+                                        $sql = "SELECT * FROM ticket WHERE `status` = 'open'";
+                                        $result = mysqli_query($conn, $sql);
+                                        $openTickets = mysqli_num_rows($result);
+                                        echo $openTickets;
+                                        ?>
+                                    </p>
                                 </div>
                                 <div class="col-4 px-3 py-4">
                                     <!-- fontawsome ticket icon -->
@@ -175,7 +207,14 @@
                             <div class="row">
                                 <div class="col-8">
                                     <h6 class="card-title">Closed Tickets</h6>
-                                    <p class="card-text">0</p>
+                                    <p class="card-text">
+                                        <?php
+                                        $sql = "SELECT * FROM ticket WHERE `status` = 'closed'";
+                                        $result = mysqli_query($conn, $sql);
+                                        $closedTickets = mysqli_num_rows($result);
+                                        echo $closedTickets;
+                                        ?>
+                                    </p>
                                 </div>
                                 <div class="col-4 px-3 py-4">
                                     <!-- fontawsome ticket icon -->
@@ -192,7 +231,14 @@
                             <div class="row">
                                 <div class="col-8">
                                     <h6 class="card-title">Pending Tickets</h6>
-                                    <p class="card-text">0</p>
+                                    <p class="card-text">
+                                        <?php
+                                        $sql = "SELECT * FROM ticket WHERE `status` = 'pending'";
+                                        $result = mysqli_query($conn, $sql);
+                                        $pendingTickets = mysqli_num_rows($result);
+                                        echo $pendingTickets;
+                                        ?>
+                                    </p>
                                 </div>
                                 <div class="col-4 px-3 py-4">
                                     <!-- fontawsome ticket icon -->
@@ -209,7 +255,14 @@
                             <div class="row">
                                 <div class="col-8">
                                     <h6 class="card-title">Resolved Tickets</h6>
-                                    <p class="card-text">0</p>
+                                    <p class="card-text">
+                                        <?php
+                                        $sql = "SELECT * FROM ticket WHERE `status` = 'resolved'";
+                                        $result = mysqli_query($conn, $sql);
+                                        $resolvedTickets = mysqli_num_rows($result);
+                                        echo $resolvedTickets;
+                                        ?>
+                                    </p>
                                 </div>
                                 <div class="col-4 px-3 py-4">
                                     <!-- fontawsome ticket icon -->
@@ -221,7 +274,6 @@
                 </div>
             </div>
 
-
             <!-- task box stars -->
             <div class="row mt-3">
                 <div class="col-12">
@@ -232,27 +284,55 @@
                                 <td><b>Ticket Subject</b></td>
                                 <td><b>Requester Name</b></td>
                                 <td><b>Request On</b></td>
-                                <td><b>Other</b></td>
                                 <td><b>Status</b></td>
                                 <td><b>Action</b></td>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Test</td>
-                                <td>Test</td>
-                                <td>Test</td>
-                                <td>Test</td>
-                                <td>Test</td>
+                            <?php
+                            $sql = "SELECT * FROM ticket";
+                            $result = mysqli_query($conn, $sql);
+                            while ($row = mysqli_fetch_assoc($result)){
+                                $ticket_id = $row['id'];
+                                $ticket_subject = $row['subject'];
+                                $requester_name = $row['requester_name'];
+                                $request_on = $row['requested_on'];
+                                $status = $row['status'];
+                                echo "<tr>
+                                <td>".$ticket_id."</td>
+                                <td>".$ticket_subject."</td>
+                                <td>".$requester_name."</td>
+                                <td>".$request_on."</td>
+                                <td>";
+                                if ($status == 'open') {
+                                    echo "<span class='badge bg-success'>".$status."</span>";
+                                }elseif ($status == 'closed') {
+                                    echo "<span class='badge bg-danger'>".$status."</span>";
+                                }elseif ($status == 'pending') {
+                                    echo "<span class='badge bg-warning'>".$status."</span>";
+                                }elseif ($status == 'resolved') {
+                                    echo "<span class='badge bg-info'>".$status."</span>";
+                                }
+                                else {
+                                    echo "<span class='badge bg-secondary'>".$status."</span>";
+                                }
+                                echo
+                                "</td>
                                 <td>
-                                    <div class="btn-group" role="group" aria-label="Basic example">
-                                        <button type="button" class="btn btn-primary"><i class="fas fa-eye"></i></button>
-                                        <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
-                                        <button type="button" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                <div class='dropdown'>
+                                        <button class='btn btn-light dropdown-toggle' type='button' id='dropdownMenuButton' data-bs-toggle='dropdown' aria-expanded='false'>
+                                                <img src='./img/3.png' alt='' width='20px' height='20px' style='background-color: #0f7dff;'>
+                                        </button>
+                                        <ul class='dropdown-menu' aria-labelledby='dropdownMenuButton'>
+                                            <li><a href='edit-ticket.php?id=".$ticket_id."' class='dropdown-item'>Edit</a></li>
+                                            <li><a class='dropdown-item' href='edit-expenses.php?id='>Delete</a></li>
+                                        </ul>
                                     </div>
+                                
                                 </td>
-                            </tr>
+                            </tr>";
+                            }
+                            ?>
                         </tbody>
                     </table>
                 </div>

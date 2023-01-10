@@ -723,8 +723,6 @@ if (isset($_REQUEST['save'])) {
                                 ?>
                             </div>
                         </div>
-
-
                         <!-- Close and save button -->
                         <div class="row">
                             <div class="col-auto">
